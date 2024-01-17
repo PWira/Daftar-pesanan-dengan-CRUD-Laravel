@@ -1,0 +1,73 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tambahkan style untuk class "menu-option" */
+.menu-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-option::before {
+    content: attr(value);
+}
+
+.menu-option::after {
+    content: attr(data-price);
+    margin-left: auto;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+nav h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.order-form {
+    max-width: 600px;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input,
+select {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,114 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-option::before {
+    content: attr(value);
+}
+
+.menu-option::after {
+    content: attr(data-price);
+    margin-left: auto;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav h1 {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+main {
+    padding: 20px;
+}
+
+.order-form {
+    max-width: 600px;
+    margin: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input,
+select {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.form-scroll-container {
+    max-height: inherit;
+    overflow-y: inherit;
+}
+
+#struk {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+}
+
+.struk-container {
+    border: 1px solid #ddd;
+    padding: 15px;
+    max-width: 400px;
+    margin: auto;
+}
+
+.struk-header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.struk-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.struk-total {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}

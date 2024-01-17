@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Menu Makanan/Minuman</title>
+    <title>Menu Makanan</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome (free) -->
@@ -49,19 +49,20 @@
     </header>
 
     <div class="container mt-4">
-        <h2>Menu Makanan/Minuman</h2>
-        <form>
+        <h2>Menu Makanan</h2>
+        <form method="post" action="/tambah-form-makanan">
+            @csrf
             <div class="mb-3">
-                <label for="namaMakanan" class="form-label">Nama Makanan/Minuman</label>
-                <input type="text" class="form-control" id="namaMakanan" placeholder="Masukkan nama makanan/minuman">
+                <label for="namaMakanan" class="form-label">Nama Makanan</label>
+                <input type="text" class="form-control" id="namaMakanan" name="makanan" placeholder="Masukkan nama makanan">
             </div>
             <div class="mb-3">
                 <label for="hargaMakanan" class="form-label">Harga</label>
-                <input type="text" class="form-control" id="hargaMakanan" placeholder="Masukkan harga makanan/minuman">
+                <input type="number" class="form-control" id="hargaMakanan" name="harga" placeholder="Masukkan harga makanan">
             </div>
             <div class="mb-3">
                 <label for="lamaPembuatan" class="form-label">Lama Pembuatan</label>
-                <input type="text" class="form-control" id="lamaPembuatan" placeholder="Masukkan lama pembuatan">
+                <input type="number" class="form-control" id="lamaPembuatan" name="penyediaan" placeholder="Masukkan lama pembuatan">
             </div>
             <button type="submit" class="btn btn-primary">Tambahkan Menu</button>
         </form>

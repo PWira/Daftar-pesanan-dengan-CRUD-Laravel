@@ -22,36 +22,37 @@
     </header>
 
     <main>
-        <section class="order-form">
-            <form>
-                <label for="tableNumber">Nomor Meja{{-- $req->meja --}}</label>
-                <input type="text" id="tableNumber" name="tableNumber" required>
+        <section class="order-form form-scroll-container">
+            <form method="post" action="/tambah-form-pesanan">
+                @csrf <!-- Add CSRF token for protection -->
 
-                <label for="menuItems">Menu Makanan/Minuman:</label>
-                <select id="menuItems" name="menuItems" multiple required onchange="showQuantityInput()">
-                    {{-- @forelse ($menu as $item) --}}
+                <label for="meja">Nomor Meja{{-- $req->meja --}}</label>
+                <input type="number" id="meja" name="meja" required>
+                
+                <label for="orang">Jumlah Orang :</label>
+                <input type="number" id="orang" name="orang">
+                
+                <label for="menuItem">Menu Makanan:</label>
+                <select id="menuItem" name="menu[]" multiple required onchange="showQuantityInput()">
                     <!-- Daftar menu bisa ditambahkan di sini -->
-                    <option value="" data-price="10" class="menu-option">Menu 1 - Rp 10,000</option>
-                    <option value="" data-price="15" class="menu-option">Menu 2 - Rp 15,000</option>
+                    <option value="1" data-price="10.000" class="menu-option"> Menu 1</option>
+                    <option value="2" data-price="15.000" class="menu-option"> Menu 2</option>
                     <!-- Tambahkan lebih banyak menu sesuai kebutuhan -->
                 </select>
                 <!-- Tambahkan div untuk menampilkan input jumlah dinamis -->
                 <div id="quantityInputs"></div>
 
-                <label for="totalPrice">Harga Total:</label>
-                <input type="text" id="totalPrice" name="totalPrice" readonly>
 
-                <label for="cookTime">Lama Pembuatan:</label>
-                <input type="text" id="cookTime" name="cookTime">
+                <label for="total_harga">Harga Total:</label>
+                <input type="number" id="total_harga" name="total_harga">
+
+                <label for="penyediaan">Lama Pembuatan:</label>
+                <input type="text" id="penyediaan" name="penyediaan">
 
                 <button type="submit">Pesan</button>
             </form>
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2024 Menu Order - About Us</p>
-    </footer>
 </body>
 
 </html>

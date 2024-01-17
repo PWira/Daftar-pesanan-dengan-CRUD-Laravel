@@ -7,32 +7,53 @@ use Illuminate\Support\Facades\DB;
 
 class foodController extends Controller{
 
-    public function daftarPesanan(Request $req){
-        //raw query -> mysqli_query("insert into barang value()")
+    public function tambahPesanan(Request $req){
+
+        $dataArray = $req->menu;
+        $dataString = implode(',', $dataArray);
+
+        $updating = 0;
+
         DB::table("pesanan")->insert([
             "meja"=>$req->meja,
-            "menu"=>$req->menu,
-            "jumlah_orang"=>$req->jumlah_orang,
+            "menu"=>$dataString,
+            "orang"=>$req->orang,
             "total_harga"=>$req->total_harga,
-            "lama_penyediaan"=>$req->lama_penyediaan,
+            "penyediaan"=>$req->penyediaan,
+            "status"=>$req->status,
             "created_at"=>now()
         ]);  
 
         return redirect('pesanan');
     }
+
+    public function tambahMakanan(Request $req){
+        
+        $updating = 0;
+
+        DB::table("makanan")->insert([
+            "makanan"=>$req->makanan,
+            "harga"=>$req->harga,
+            "penyediaan"=>$req->penyediaan,
+            "status"=>$updating,
+            "created_at"=>now()
+        ]);  
+
+        return redirect('menu');
+    }
         
     public function detailPesanan(){
-        $pesanan = DB::table("pesanan")->get();
-        return view('detailPesanan')->with('pesanan',$pesanan);
+        $lihat = DB::table("pesanan")->get();
+        return view('proyek.Pesanan')->with('lihat',$lihat);
     }
 
     public function lihatMenu(){
-        $menu = DB::table("menu")->get();
-        return view('menu')->with('menu',$menu);
+        $lihat = DB::table("makanan")->get();
+        return view('proyek.menu')->with('lihat',$lihat);
     }
 
-    public function hapusBarang($id){
-        DB::table("barang")->where('id','=',$id)->delete();
+    public function hapusMakanan($id){
+        DB::table("makanan")->where('id','=',$id)->delete();
 
         return redirect('lihat-barang');
     }

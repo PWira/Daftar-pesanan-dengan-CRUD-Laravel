@@ -14,7 +14,7 @@ class Makanan extends Migration
     public function up(){
         Schema::create('makanan', function (Blueprint $table) {
             $table->id();
-            $table->string('nama')->unique();
+            $table->string('makanan');
             $table->integer('harga');
             $table->integer('penyediaan');
             $table->integer('status');

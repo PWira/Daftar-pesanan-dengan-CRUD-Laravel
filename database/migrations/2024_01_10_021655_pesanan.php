@@ -14,11 +14,11 @@ class Pesanan extends Migration
     public function up(){
         Schema::create('pesanan', function (Blueprint $table) {
             $table->id();
-            $table->string('meja');
-            $table->integer('menu');
-            $table->integer('jumlah_orang');
+            $table->integer('meja');
+            $table->string('menu');
+            $table->integer('orang');
             $table->integer('total_harga');
-            $table->integer('lama_penyediaan');
+            $table->integer('penyediaan');
             $table->integer('status');
             $table->timestamps();
         });

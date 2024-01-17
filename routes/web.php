@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\foodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,20 +24,25 @@ Route::get('/', function () {
 });
 
 Route::get('pesanan', function () {
-    return view('pesanan');
+    return view('proyek.pesanan');
 });
 Route::get('tambah-pesanan', function (Request $req) {
     return view('proyek.tambahPesanan')->with('request', $req);
 });
 
-Route::get('menu', function () {
-    return view('menu');
+Route::get('tambah-menu', function () {
+    return view('proyek.tambahMenu');
 });
 
-Route::get('tambahMenu', function () {
-    return view('tambah');
-});
+Route::post('tambah-form-pesanan',[foodController::class, 'tambahPesanan']);
+Route::post('tambah-form-makanan',[foodController::class, 'tambahMakanan']);
+
+Route::get('pesanan', [foodController::class, 'lihatPesanan']);
+Route::get('menu', [foodController::class, 'lihatMenu']);
+
+Route::get('hapus-pesanan/{id}',[stokController::class, 'hapusPesanan']);
+Route::get('hapus-makanan/{id}',[stokController::class, 'hapusMakanan']);
 
 Route::get('logs', function () {
-    return view('logs');
+    return view('proyek.logs');
 });

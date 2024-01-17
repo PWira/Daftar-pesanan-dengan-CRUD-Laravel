@@ -66,8 +66,17 @@ footer {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 1em;
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.order-form {
+    max-height: 80vh; /* Misalnya, tinggi maksimum formulir 80% dari tinggi viewport */
+    overflow-y: auto; /* Tambahkan overflow-y: auto untuk memunculkan scrollbar jika diperlukan */
+}
+
+.form-scroll-container {
+    max-height: inherit; /* Warisi tinggi maksimum dari parent (.order-form) */
+    overflow-y: inherit; /* Warisi overflow-y dari parent (.order-form) */
 }

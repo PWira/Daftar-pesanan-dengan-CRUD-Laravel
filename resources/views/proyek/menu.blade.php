@@ -62,28 +62,24 @@
           <tr>
             <th>Nama Makanan</th>
             <th>Harga</th>
-            <th>Lama Penyediaan (menit)</th>
             <th>Aksi</th>
           </tr>
         </thead>
         <tbody id="tableBody">
             @forelse ($lihat as $item)
-            <tr id="isi">
-                <td>{{ $item->makanan }}</td>
-                <td>{{ $item->harga }}</td>
-                <td>{{ $item->penyediaan }}</td>
-                <td class="text-center align-middle">
-                    <a class="fas fa-trash center" href="hapus-makanan{{$item->id}}">
-                        <button class="btn btn-danger">
+                <tr id="isi">
+                    <td>{{ $item->makanan }}</td>
+                    <td>{{ $item->harga }}</td>
+                    <td class="text-center align-middle">
+                        <button class="btn btn-danger" onclick="confirmDelete({{ $item->id }})">
                             HAPUS
                         </button>
-                    </a>
-                </td>
-            </tr>
+                    </td>
+                </tr>
             @empty
-            <tr id="noDataMessage">
-                <td colspan="7" class="text-center">Tidak ada data untuk ditampilkan.</td>
-            </tr>
+                <tr id="noDataMessage">
+                    <td colspan="7" class="text-center">Tidak ada data untuk ditampilkan.</td>
+                </tr>
             @endforelse
         </tbody>
       </table>

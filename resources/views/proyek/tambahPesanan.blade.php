@@ -6,6 +6,7 @@
         <title>Menu Makanan</title>
         <link rel="stylesheet" href="styles.css">
         <script src="script.js" defer></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome (free) -->
@@ -17,12 +18,36 @@
     </head>
 <body>
     
-@forelse ($lihat as $item)
-
-    <header>
-        <nav>
-            <h1>Menu Order</h1>
-        </nav>
+    <header class="bg-dark text-light py-4">
+        <div class="container">
+            <h1 class="display-4">Menu Restoran</h1>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Chef di Dapur</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url('/')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('pesanan') }}">Pesanan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('menu') }}">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('struk') }}">Struk</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('logs') }}">Logs</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+        </div>
     </header>
 
     <main>
@@ -30,38 +55,52 @@
         <section class="order-form form-scroll-container">
             <div class="text-start mb-3">
                 <a href="{{ url()->previous() }}">
-                <button class="btn btn-danger" id="addButton" >Kembali</button>
+                    <button class="btn btn-danger" id="addButton">Kembali</button>
                 </a>
             </div>
-        <section class="order-form form-scroll-container">
             <form method="post" action="/tambah-form-pesanan">
                 @csrf <!-- Add CSRF token for protection -->
-
+    
                 <label for="meja">Nomor Meja{{-- $req->meja --}}</label>
                 <input type="number" id="meja" name="meja" required>
-                
+    
                 <label for="orang">Jumlah Orang :</label>
                 <input type="number" id="orang" name="orang">
-                
-                <label for="menuItem">Menu Makanan:</label>
-                <select id="menuItem" name="menu[]" multiple required onchange="showQuantityInput()">
-                    <!-- Daftar menu bisa ditambahkan di sini -->
-                    <option value={{ $item->id }} data-price={{ $item->harga }} class="menu-option">. {{ $item->makanan }}
-                    </option>
-                    @empty
-                    <tr id="noDataMessage">
-                        <td colspan="7" class="text-center">Tidak ada data untuk ditampilkan.</td>
-                    </tr>
-                    @endforelse
-                    <!-- Tambahkan lebih banyak menu sesuai kebutuhan -->
-                </select>
-
+    
+                <!-- Form for selecting menu items -->
+                <div class="container mt-4">
+                    <div class="form-group">
+                        <label for="menu">Pilih Menu:</label>
+                        <select class="form-control" id="menuList" name="menuList">
+                            @forelse ($lihat as $item)
+                            <option value={{ $item->id }} data-price={{ $item->harga }} class="menu-option">
+                                {{ $item->id }}. {{ $item->makanan }} - Harga: {{ $item->harga }}
+                            </option>
+                            @empty
+                            <option value="0" data-price="0" class="menu-option">Tidak ada data untuk ditampilkan.</option>
+                            @endforelse
+                            <!-- Tambahkan opsi sesuai dengan menu yang tersedia -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Jumlah Pesanan:</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Jumlah">
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-primary" onclick="addMenuItem()">Tambah ke Pesanan</button>
+                </div>
+    
+                <!-- Display selected menu items -->
+                <div class="container mt-4">
+                    <h2>Daftar Menu yang Akan Dimasak</h2>
+                    <ul id="daftar-menu" class="list-group">
+                        <!-- Daftar menu yang akan ditampilkan di sini -->
+                    </ul>
+                </div>
 
                 <label for="total_harga">Harga Total:</label>
                 <input type="number" id="total_harga" name="total_harga" readonly>
-
-                <label for="penyediaan">Lama Pembuatan:</label>
-                <input type="text" id="penyediaan" name="penyediaan" readonly>
+                <br>
 
                 <button type="submit">Pesan</button>
             </form>
@@ -74,4 +113,9 @@
         <p>&copy; 2024 Menu Restoran | About Us</p>
     </div>
 </footer>
+
+<script>
+
+</script>
+
 </html>

@@ -60,10 +60,6 @@
                 <label for="hargaMakanan" class="form-label">Harga</label>
                 <input type="number" class="form-control" id="hargaMakanan" name="harga" placeholder="Masukkan harga makanan">
             </div>
-            <div class="mb-3">
-                <label for="lamaPembuatan" class="form-label">Lama Pembuatan (menit)</label>
-                <input type="number" class="form-control" id="lamaPembuatan" name="penyediaan" placeholder="Masukkan lama pembuatan (dalam menit)">
-            </div>
             <button type="submit" class="btn btn-primary">Tambahkan Menu</button>
         </form>
     </div>

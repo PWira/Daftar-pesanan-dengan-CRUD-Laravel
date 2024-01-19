@@ -44,70 +44,85 @@
                 </li>
             </ul>
         </div>
+        <button class="text-end btn btn-outline-danger btn-transparent" onclick="clearHiddenMejas()">Force Refresh</button>
     </nav>
         </div>
     </header>
 
-  <div class="container mt-4">
-    <h1 class="text-center">Chef di Dapur - Pelayan Pesanan</h1>
-    <div class="text-end mb-3">
-        <a href="/tambah-pesanan">
-        <button class="btn btn-primary" id="addButton" >Tambah Pesanan</button>
-        </a>
-    </div>
+    @php
+        $folderPath = public_path('formPesanan');
+        $mejaData = [];
 
-    <!-- Daftar Pesanan -->
-    <div class="card mt-4">
-      <div class="card-header">
-        Daftar Pesanan
-      </div>
-      <div class="card-body">
-        <ul class="list-group">
-          <!-- Contoh Pesanan -->
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Meja 1
-            <span class="badge badge-primary badge-pill">3 items</span>
-          </li>
-          <!-- End Contoh Pesanan -->
-        </ul>
-      </div>
-    </div>
-    <!-- End Daftar Pesanan -->
+        $files = File::allFiles($folderPath);
 
-    <!-- Detail Pesanan -->
-    <div class="card mt-4">
-      <div class="card-header">
-        Detail Pesanan
-      </div>
-      <div class="card-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Nama Menu</th>
-              <th scope="col">Jumlah</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Contoh Detail Pesanan -->
-            <tr>
-              <th scope="row">1</th>
-              <td>Nasi Goreng</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Mie Goreng</td>
-              <td>2</td>
-            </tr>
-            <!-- End Contoh Detail Pesanan -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <!-- End Detail Pesanan -->
+        foreach ($files as $file) {
+            $data = include($file->getPathname());
 
-  </div>
+            $mejaData[] = [
+                'meja' => $data['meja'],
+                'id' => $data['id'],
+                'selectedMenus' => $data['selectedMenus'],
+                'quantity' => $data['quantity'],
+                'harga' => $data['total_harga'],
+            ];
+        }
+    @endphp
+
+    <div class="container mt-4">
+        <h1 class="text-center">Chef di Dapur - Pelayan Pesanan</h1>
+        <div class="text-end mb-3">
+            <a href="/tambah-pesanan">
+                <button class="btn btn-primary" id="addButton">Tambah Pesanan</button>
+            </a>
+        </div>
+
+        @foreach ($mejaData as $mejaItem)
+            <div class="card mt-4">
+                <div class="card-header">
+                    <div>
+                        Detail Pesanan - Meja {{ $mejaItem['meja'] }}
+                    </div>
+                    <div class="text-end mb-3">
+                        <button class="btn btn-danger btn-sm" onclick="confirmHide('{{ $mejaItem['id'] }}', '{{ $mejaItem['meja'] }}', '{{ $mejaItem['harga'] }}')">
+                            Hide Meja</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Menu</th>
+                                <th scope="col">Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($mejaItem['selectedMenus'] as $index => $selectedMenu)
+                                @php
+                                    $menuDetails = explode(' - ', $selectedMenu);
+                                    $menuName = $menuDetails[0];
+                                    $menuPrice = $menuDetails[1];
+                                @endphp
+                                <tr>
+                                    <th scope="row">{{ $index + 1 }}</th>
+                                    <td>{{ $menuName }}</td>
+                                    <td>{{ $mejaItem['quantity'] }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="text-center">Tidak ada data untuk ditampilkan.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @endforeach
+
+        <br>
+        <br>
+        <br>
+    </div>
 
   <footer class="bg-dark text-light">
     <div class="container text-center">
@@ -117,4 +132,4 @@
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

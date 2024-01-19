@@ -15,10 +15,9 @@ class Pesanan extends Migration
         Schema::create('pesanan', function (Blueprint $table) {
             $table->id();
             $table->integer('meja');
-            $table->string('menu');
+            $table->text('menu');
             $table->integer('orang');
             $table->integer('total_harga');
-            $table->integer('penyediaan');
             $table->integer('status');
             $table->timestamps();
         });

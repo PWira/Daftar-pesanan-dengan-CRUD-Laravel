@@ -22,6 +22,9 @@ Route::get('laravel_template', function () {
 Route::get('/', function () {
     return view('homepage');
 });
+Route::get('testing', function () {
+    return view('testing');
+});
 
 Route::get('pesanan', function () {
     return view('proyek.pesanan');
@@ -47,6 +50,7 @@ Route::get('tambah-menu', function () {
 });
 
 Route::post('tambah-form-pesanan',[foodController::class, 'tambahPesanan']);
+Route::post('selesai-form-pesanan',[foodController::class, 'selesaiPesanan']);
 Route::post('tambah-form-makanan',[foodController::class, 'tambahMakanan']);
 
 Route::get('pesanan', [foodController::class, 'detailPesanan']);
@@ -54,6 +58,6 @@ Route::get('tambah-pesanan', [foodController::class, 'listMenu']);
 Route::get('menu', [foodController::class, 'lihatMenu']);
 Route::get('logs', [foodController::class, 'riwayat']);
 
-Route::get('hapus-pesanan/{id}',[stokController::class, 'hapusPesanan']);
-Route::get('hapus-makanan/{id}',[stokController::class, 'hapusMakanan']);
+Route::get('hapus-pesanan/{id}',[foodController::class, 'hapusPesanan']);
+Route::get('hapus-makanan/{id}',[foodController::class, 'hapusMakanan']);
 

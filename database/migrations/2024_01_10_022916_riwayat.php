@@ -14,7 +14,7 @@ class Riwayat extends Migration
     public function up(){
         Schema::create('riwayat', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pid')->constrained('pesanan');
+            $table->integer('pid');
             $table->integer('total_harga');
             $table->integer('status');
             $table->timestamps();

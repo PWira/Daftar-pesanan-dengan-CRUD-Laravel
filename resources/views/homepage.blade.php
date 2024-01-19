@@ -51,16 +51,17 @@
     <!-- Pemesanan -->
     <div class="container mt-4">
         <h2>Kasir Pemesanan</h2>
-        
     </div>
 
     <!-- Daftar Menu -->
     <div class="container mt-4">
         <h2>Daftar Menu yang Akan Dimasak</h2>
-        
+        <ul id="daftar-menu" class="list-group">
+            <!-- Daftar menu yang akan ditampilkan di sini -->
+        </ul>
     </div>
 
-    <footer class="bg-dark text-light">
+    <footer class="bg-dark text-light py-3 mt-5">
         <div class="container text-center">
             <p>&copy; 2024 Menu Restoran | About Us</p>
         </div>
@@ -72,7 +73,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- Script untuk menambahkan pesanan ke daftar menu -->
-    {{-- <script>
+    <script>
         $(document).ready(function () {
             $('form').submit(function (event) {
                 event.preventDefault();
@@ -84,7 +85,7 @@
                 $('#daftar-menu').append('<li class="list-group-item">' + quantity + 'x ' + menu + '</li>');
             });
         });
-    </script> --}}
+    </script>
 </body>
 
 </html>

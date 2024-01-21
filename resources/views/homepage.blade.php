@@ -18,9 +18,9 @@
 <body>
     <header class="bg-dark text-light py-4">
         <div class="container">
-            <h1 class="display-4">Menu Restoran</h1>
+            <h1 class="display-4">Next Dash</h1>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url('/')}}">Chef di Dapur</a>
+        <a class="navbar-brand" href="{{ url('/')}}">Next Dash</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,9 +48,16 @@
         </div>
     </header>
 
+    <main class="mainGrid">
+        <a href="{{ url('pesanan') }}" class="grid-button">Pesanan</a>
+        <a href="{{ url('menu') }}" class="grid-button">Menu</a>
+        <a href="{{ url('struk') }}" class="grid-button">Struk</a>
+        <a href="{{ url('logs') }}" class="grid-button">Riwayat / Logs</a>
+    </main>
+
     <footer class="bg-dark text-light">
         <div class="container text-center">
-            <p>&copy; 2024 Menu Restoran | About Us</p>
+            <p>&copy; 2024 Next Dash | About Us</p>
         </div>
       </footer>
 

@@ -69,6 +69,31 @@ button {
     cursor: pointer;
 }
 
+.mainGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5vw;
+    padding: 0.5vw;
+}
+
+.grid-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20vw;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.grid-button:hover {
+    background-color: #0056b3;
+}
+
 .btn-transparent {
     background-color: rgba(255, 255, 255, 0.5); /* Adjust the last value (0.5) for opacity (0 to 1) */
     border-color: rgba(255, 255, 255, 0.5); /* Adjust the last value for border opacity */

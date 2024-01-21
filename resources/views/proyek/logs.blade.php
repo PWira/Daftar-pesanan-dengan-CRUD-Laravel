@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Menu Makanan</title>
+        <title>Next Dash</title>
         <link rel="stylesheet" href="styles.css">
         <script src="script.js" defer></script>
         <!-- Bootstrap CSS -->
@@ -18,9 +18,9 @@
 <body>
     <header class="bg-dark text-light py-4">
         <div class="container">
-            <h1 class="display-4">Menu Restoran</h1>
+          <h1 class="display-4">Next Dash</h1>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Chef di Dapur</a>
+              <a class="navbar-brand" href="{{ url('/')}}">Next Dash</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -47,20 +47,18 @@
     </nav>
         </div>
     </header>
+    <br>
+    <h1 class="text-center">Logs / Riwayat</h1>
 
-    @foreach ($logs as $item)
-    @if ($item->id === null)
-      <h1>DATA TIDAK ADA</h1>
-    @else
-      @php
+    @php
         $folderPath = public_path('formPesanan');
         $mejaData = [];
-
+        
         $files = File::allFiles($folderPath);
-
+        
         foreach ($files as $file) {
           $data = include($file->getPathname());
-
+          
           $mejaData[] = [
             'pid' => $data['id'],
             'selectedMenus' => $data['selectedMenus'],
@@ -68,58 +66,63 @@
             'harga' => $data['total_harga'],
           ];
         }
-      @endphp
+        @endphp
 
-      <div class="container mt-5">
-        <div class="card-body">
-          <ul id="daftarPesanan" class="list-group">
-            <!-- Pesanan akan ditampilkan di sini -->
-          </ul>
-        </div>
-      </div>
-      <!-- End Daftar Pesanan -->
+<div class="container mt-5">
+  <div class="card-body">
+    <ul id="daftarPesanan" class="list-group">
+      <!-- Pesanan akan ditampilkan di sini -->
+    </ul>
+  </div>
+</div>
+<!-- End Daftar Pesanan -->
 
-      <!-- Detail Pesanan -->
-      <div class="card mt-4">
-        <div class="card-header">
-          Detail Pesanan
-        </div>
-        <div class="card-body">
-          <table class="table">
-            <thead>
+<!-- Detail Pesanan -->
+<div class="card mt-4">
+  <div class="card-header">
+      Detail Pesanan
+  </div>
+  <div class="card-body">
+      <table class="table">
+          <thead>
               <tr>
-                <th scope="col">No</th>
-                <th scope="col">ID Pesanan</th>
-                <th scope="col">Tanggal Pemesanan</th>
-                <th scope="col">Menu yang Dipesan</th>
-                <th scope="col">Total Harga</th>
+                  <th scope="col">No</th>
+                  <th scope="col">ID Pesanan</th>
+                  <th scope="col">Tanggal Pemesanan</th>
+                  <th scope="col">Menu yang Dipesan</th>
+                  <th scope="col">Total Harga</th>
               </tr>
-            </thead>
-            <tbody id="detailPesanan">
-              @forelse ($mejaData as $mejaItem)
-                <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $mejaItem['pid'] }}</td>
-                  <td>{{ $item->created_at }}</td>
-                  <td scope="row">Menu :
-                    @foreach ($mejaItem['selectedMenus'] as $menu)
-                      {{ $menu }}
-                    @endforeach
-                  </td>
-                  <td>{{ $mejaItem['harga'] }}</td>
-                </tr>
+          </thead>
+          <tbody id="detailPesanan">
+              @forelse ($logs as $item)
+                  @if ($item->id !== null)
+                      <tr>
+                          <td>{{ $loop->iteration }}</td>
+                          <td>{{ $item->id }}</td>
+                          <td>{{ $item->created_at }}</td>
+                          <td scope="row">
+                            Menu:
+                            @foreach ($mejaData as $mejaItem)
+                                @if ($mejaItem['pid'] == $item->id)
+                                    @foreach ($mejaItem['selectedMenus'] as $menu)
+                                        {{ $menu }}
+                                    @endforeach
+                                    <td>{{ $mejaItem['harga'] }}</td>
+                                @endif
+                            @endforeach
+                        </td>
+                      </tr>
+                  @endif
               @empty
-                <tr>
-                  <td colspan="5" class="text-center">Tidak ada data untuk ditampilkan.</td>
-                </tr>
+                  <tr>
+                      <td colspan="5" class="text-center">Tidak ada data untuk ditampilkan.</td>
+                  </tr>
               @endforelse
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <!-- End Detail Pesanan -->
-    @endif
-  @endforeach
+          </tbody>
+      </table>
+  </div>
+</div>
+<!-- End Detail Pesanan -->
 
 </body>
 

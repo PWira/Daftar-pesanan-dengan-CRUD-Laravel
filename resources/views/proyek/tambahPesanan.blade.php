@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Menu Makanan</title>
+        <title>Next Dash</title>
         <link rel="stylesheet" href="styles.css">
         <script src="script.js" defer></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -20,9 +20,9 @@
     
     <header class="bg-dark text-light py-4">
         <div class="container">
-            <h1 class="display-4">Menu Restoran</h1>
+            <h1 class="display-4">Next Dash</h1>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Chef di Dapur</a>
+                <a class="navbar-brand" href="{{ url('/')}}">Next Dash</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

@@ -74,27 +74,21 @@ class foodController extends Controller{
     
         
     public function detailPesanan(){
-    // Path to the folder containing the PHP files
-    $folderPath = public_path('formPesanan');
+        $folderPath = public_path('formPesanan');
+        
+        $files = File::allFiles($folderPath);
 
-    // Get all files in the folder
-    $files = File::allFiles($folderPath);
+        $selectedMenus = [];
 
-    // Initialize an array to store the data from files
-    $selectedMenus = [];
+        foreach ($files as $file) {
+            $data = include($file->getPathname());
 
-    // Loop through each file and include it
-    foreach ($files as $file) {
-        $data = include($file->getPathname());
+            $selectedMenus = array_merge($selectedMenus, $data['selectedMenus']);
+        }
 
-        // Merge the data into the existing array
-        $selectedMenus = array_merge($selectedMenus, $data['selectedMenus']);
+        return view('proyek.Pesanan', compact('selectedMenus'));
+
     }
-
-    // Pass the $selectedMenus array to the view
-    return view('proyek.Pesanan', compact('selectedMenus'));
-
-}
 
     public function lihatMenu(){
         $lihat = DB::table("makanan")->get();

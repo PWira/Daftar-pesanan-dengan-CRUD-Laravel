@@ -48,60 +48,80 @@
         </div>
     </header>
 
-    <div class="container mt-5">
-    <div class="card-body">
-      <ul id="daftarPesanan" class="list-group">
-        <!-- Pesanan akan ditampilkan di sini -->
-      </ul>
-    </div>
-  </div>
-  <!-- End Daftar Pesanan -->
+    @foreach ($logs as $item)
+    @if ($item->id === null)
+      <h1>DATA TIDAK ADA</h1>
+    @else
+      @php
+        $folderPath = public_path('formPesanan');
+        $mejaData = [];
 
-  <!-- Detail Pesanan -->
-  <div class="card mt-4">
-    <div class="card-header">
-      Detail Pesanan
-    </div>
-    <div class="card-body">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">No</th>
-            <th scope="col">ID Pesanan</th>
-            <th scope="col">Tanggal Pemesanan</th>
-            <th scope="col">Menu yang Dipesan</th>
-            <th scope="col">Total Harga</th>
-          </tr>
-        </thead>
-        <tbody id="detailPesanan">
-        <tr>
-              <th scope="row">1</th>
-              <td>YG014528964810</td>
-              <td>9-1-2024</td>
-              <td>Nasi Goreng</td>
-              <th>Rp. 80.000</th>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>AF069482752910</td>
-              <td>17-1-2024</td>
-              <td>Mie Goreng</td>
-              <th>Rp. 34.000</th>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>PW831974291047</td>
-              <td>9-12-2023</td>
-              <td>Mie Goreng</td>
-              <th>Rp. 68.000</th>
-            </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <!-- End Detail Pesanan -->
+        $files = File::allFiles($folderPath);
 
-</div>
+        foreach ($files as $file) {
+          $data = include($file->getPathname());
+
+          $mejaData[] = [
+            'pid' => $data['id'],
+            'selectedMenus' => $data['selectedMenus'],
+            'quantity' => $data['quantity'],
+            'harga' => $data['total_harga'],
+          ];
+        }
+      @endphp
+
+      <div class="container mt-5">
+        <div class="card-body">
+          <ul id="daftarPesanan" class="list-group">
+            <!-- Pesanan akan ditampilkan di sini -->
+          </ul>
+        </div>
+      </div>
+      <!-- End Daftar Pesanan -->
+
+      <!-- Detail Pesanan -->
+      <div class="card mt-4">
+        <div class="card-header">
+          Detail Pesanan
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">ID Pesanan</th>
+                <th scope="col">Tanggal Pemesanan</th>
+                <th scope="col">Menu yang Dipesan</th>
+                <th scope="col">Total Harga</th>
+              </tr>
+            </thead>
+            <tbody id="detailPesanan">
+              @forelse ($mejaData as $mejaItem)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $mejaItem['pid'] }}</td>
+                  <td>{{ $item->created_at }}</td>
+                  <td scope="row">Menu :
+                    @foreach ($mejaItem['selectedMenus'] as $menu)
+                      {{ $menu }}
+                    @endforeach
+                  </td>
+                  <td>{{ $mejaItem['harga'] }}</td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="5" class="text-center">Tidak ada data untuk ditampilkan.</td>
+                </tr>
+              @endforelse
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- End Detail Pesanan -->
+    @endif
+  @endforeach
+
+</body>
 
 <footer class="bg-dark text-light">
   <div class="container text-center">
@@ -112,3 +132,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</html>

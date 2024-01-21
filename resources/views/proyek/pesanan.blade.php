@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Menu Makanan</title>
         <link rel="stylesheet" href="styles.css">
         <script src="script.js" defer></script>
@@ -84,7 +85,8 @@
                     </div>
                     <div class="text-end mb-3">
                         <button class="btn btn-danger btn-sm" onclick="confirmHide('{{ $mejaItem['id'] }}', '{{ $mejaItem['meja'] }}', '{{ $mejaItem['harga'] }}')">
-                            Hide Meja</button>
+                            Hide Meja
+                        </button>                        
                     </div>
                 </div>
                 <div class="card-body">
@@ -124,12 +126,12 @@
         <br>
     </div>
 
-  <footer class="bg-dark text-light">
-    <div class="container text-center">
-        <p>&copy; 2024 Menu Restoran | About Us</p>
-    </div>
+    <footer class="bg-dark text-light">
+        <div class="container text-center">
+            <p>&copy; 2024 Menu Restoran | About Us</p>
+        </div>
     </footer>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

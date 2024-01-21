@@ -46,20 +46,20 @@ function addMenuItem() {
 }
 
 function confirmHide(id, meja, harga) {
-    var isConfirmed = confirm('Are you sure you want to hide Meja ' + meja + '?');
+    var isConfirmed = confirm('Are you sure you want to hide Meja ' + id + '?');
     
     if (isConfirmed) {
-        hideMeja(meja);
+        hideMeja(id);
 
         // Store the hidden Meja ID in local storage
-        storeHiddenMeja(meja);
+        storeHiddenMeja(id);
 
         // Send AJAX request to store data in Laravel controller
         $.ajax({
             type: 'POST',
             url: '/selesai-form-pesanan',
             data: {
-                _token: '{{ csrf_token() }}',
+                _token: $('meta[name="csrf-token"]').attr('content'), // Use this line to get CSRF token dynamically
                 pid: id,
                 total_harga: harga,
                 // Add other data you want to send
@@ -72,22 +72,22 @@ function confirmHide(id, meja, harga) {
             error: function(error) {
                 console.error('Error storing data:', error);
             }
-        });
+        });        
     } else {
-        console.log('Hiding canceled for Meja ' + meja);
+        console.log('Hiding canceled for Meja ' + id);
     }
 }
 
-function hideMeja(meja) {
-    $('.card').filter(':contains("Meja ' + meja + '")').hide();
+function hideMeja(id) {
+    $('.card').filter(':contains("Meja ' + id + '")').hide();
 }
 
-function storeHiddenMeja(meja) {
+function storeHiddenMeja(id) {
     // Get existing hidden Meja IDs from local storage
     var hiddenMejas = JSON.parse(localStorage.getItem('hiddenMejas')) || [];
     
     // Add the current Meja to the array
-    hiddenMejas.push(meja);
+    hiddenMejas.push(id);
     
     // Save the updated array back to local storage
     localStorage.setItem('hiddenMejas', JSON.stringify(hiddenMejas));
@@ -103,8 +103,8 @@ function clearHiddenMejas() {
 function checkAndHideMejas() {
     var hiddenMejas = JSON.parse(localStorage.getItem('hiddenMejas')) || [];
 
-    hiddenMejas.forEach(function (meja) {
-        hideMeja(meja);
+    hiddenMejas.forEach(function (id) {
+        hideMeja(id);
     });
 }
 

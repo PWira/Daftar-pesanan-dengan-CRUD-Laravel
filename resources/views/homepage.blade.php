@@ -20,7 +20,7 @@
         <div class="container">
             <h1 class="display-4">Menu Restoran</h1>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Chef di Dapur</a>
+        <a class="navbar-brand" href="{{ url('/')}}">Chef di Dapur</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,44 +48,16 @@
         </div>
     </header>
 
-    <!-- Pemesanan -->
-    <div class="container mt-4">
-        <h2>Kasir Pemesanan</h2>
-    </div>
-
-    <!-- Daftar Menu -->
-    <div class="container mt-4">
-        <h2>Daftar Menu yang Akan Dimasak</h2>
-        <ul id="daftar-menu" class="list-group">
-            <!-- Daftar menu yang akan ditampilkan di sini -->
-        </ul>
-    </div>
-
-    <footer class="bg-dark text-light py-3 mt-5">
+    <footer class="bg-dark text-light">
         <div class="container text-center">
             <p>&copy; 2024 Menu Restoran | About Us</p>
         </div>
-    </footer>
+      </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Script untuk menambahkan pesanan ke daftar menu -->
-    <script>
-        $(document).ready(function () {
-            $('form').submit(function (event) {
-                event.preventDefault();
-
-                var menu = $('#menu').val();
-                var quantity = $('#quantity').val();
-
-                // Tambahkan pesanan ke daftar menu
-                $('#daftar-menu').append('<li class="list-group-item">' + quantity + 'x ' + menu + '</li>');
-            });
-        });
-    </script>
 </body>
 
 </html>

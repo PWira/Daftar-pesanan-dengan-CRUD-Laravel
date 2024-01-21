@@ -82,17 +82,19 @@
                     <div class="struk-header"></div>
 
                     <div class="struk-item">
-                        <th scope="row">Meja: {{ $struk['meja'] }}</th>
+                        <th scope="row">Meja : {{ $struk['meja'] }}</th>
                     </div>
-
+                    
+                    <div class="struk-item">
+                        <th scope="row">Menu :
                     @foreach ($struk['selectedMenus'] as $menu)
-                    <div class="struk-item">
-                        <th scope="row">Menu: {{ $menu }}</th>
-                    </div>
+                            <br>{{ $menu }}
                     @endforeach
+                            x {{$struk['quantity']}} porsi</th>
+                        </div>
 
                     <div class="struk-item">
-                        <th scope="row">Jumlah Orang: {{ $struk['orang'] }}</th>
+                        <th scope="row">Jumlah Orang : {{ $struk['orang'] }}</th>
                     </div>
 
                     <div class="struk-total">Total Harga: Rp {{ $struk['total_harga'] }}</div>

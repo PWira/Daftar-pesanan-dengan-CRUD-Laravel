@@ -107,7 +107,7 @@
 
     <footer class="bg-dark text-light">
         <div class="container text-center">
-            <p>&copy; 2024 Menu Restoran | About Us</p>
+            <p>&copy; 2024 Next Dash | About Us</p>
         </div>
     </footer>
     <!-- Bootstrap JS and Popper.js (required for Bootstrap) -->
